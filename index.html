@@ -134,21 +134,36 @@
 
     <!---Modal---->
 
-    <div id="container"></div>
+    <div class="modal fade" id="modal_md" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close taskclose1 closebtn"
+              data-bs-dismiss="modal"
+            ></button>
+            <h5 class="modal-title"></h5>
+          </div>
+          <div class="modal-body"></div>
+        </div>
+      </div>
+    </div>
 
     <script>
       $("#modal_md").on("shown.bs.modal", function () {
         $(".selectpicker").selectpicker("refresh");
       });
     </script>
+
     <script>
       function showMdModal(url, title) {
+        $("#modal_md").modal("show", { backdrop: "true" });
         $.ajax({
           url: url,
           success: function (response) {
-            $("#container").html(response); // Add the modal content to the modalContainer
-            $("#container #modal_md").modal("show"); // Show the modal
             $("#modal_md .modal-title").html(title);
+            $("#modal_md .modal-body").html(response);
           },
         });
       }
